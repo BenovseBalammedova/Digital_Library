@@ -15,7 +15,7 @@ public class AdminController {
 
     private final AdminService adminService;
 
-    @GetMapping()
+    @GetMapping("get-all")
     public List<User> getAll() {
         return adminService.getAll();
     }
@@ -35,10 +35,15 @@ public class AdminController {
         return adminService.getByAge(age);
     }
 
-    @GetMapping("/phoneNumber/{phoneNumber}")
+    @GetMapping("/phoneNumber/{phone-number}")
     public List<User> getByPhoneNumber(@PathVariable String phoneNumber) {
         return adminService.getByPhoneNumber(phoneNumber);
     }
+
+    @GetMapping("/age-between/{minAge}/{maxAge}")
+   public List<User> getByAgeBetween(@PathVariable Integer minAge,@PathVariable Integer maxAge){
+        return adminService.getByAgeBetween(minAge, maxAge);
+   }
 
     @PostMapping()
     public void create(@RequestBody UserRequest user) {
@@ -54,4 +59,6 @@ public class AdminController {
     public void update(@PathVariable Long id, @RequestBody UserRequest user) {
         adminService.update(id, user);
     }
+
+
 }

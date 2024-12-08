@@ -16,7 +16,7 @@ public interface BookUserService {
 
     List<BookResponse> getByName(String name);
 
-    List<BookResponse> getByPriceBound(Double price1,Double price2);
+    List<BookResponse> getByPriceBound(Double minPrice,Double maxPrice);
 
 
 

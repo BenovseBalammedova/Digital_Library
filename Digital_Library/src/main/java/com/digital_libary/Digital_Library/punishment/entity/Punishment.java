@@ -7,11 +7,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Punishment")
+@Table(name = "punishment")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Punishment {
     @Id
@@ -19,11 +21,27 @@ public class Punishment {
     Long id;
 
     @Column(name = "user_id", nullable = false)
-    Long userId;
+    String userId;
 
     @Column(name = "book_id", nullable = false)
-    Long bookId;
+    String bookId;
 
     @Column(name = "price", nullable = false)
     Double price;
+
+    @Column(name = "start_date", nullable = false)
+    LocalDate startDate;
+
+    @Column(name = "end_date", nullable = false)
+    LocalDate endDate;
+
+
+    @Column(name = "fine_amount", nullable = false)
+    Double fineAmount;
+
+    @Column(name = "reason", nullable = false)
+    String reason;
+
+    @Column(name = "status", nullable = false)
+    String status;
 }

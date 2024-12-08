@@ -7,10 +7,10 @@ import lombok.experimental.FieldDefaults;
 import java.time.LocalDate;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "sale")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Sale {
@@ -38,7 +38,7 @@ public class Sale {
     Long count;
 
     @Column(name = "price", nullable = false)
-    Double price;
+    Double salePrice;
 
     @Column(name = "total_amount", nullable = false)
     Double totalAmount;

@@ -10,4 +10,9 @@ public interface UserService {
 
     void updateById(Long id, UserRequest user);
 
+    void isUsernameTaken(String username);
+
+    void validatePassword(String password);
+
+
 }

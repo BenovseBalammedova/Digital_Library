@@ -5,6 +5,7 @@ import com.digital_libary.Digital_Library.book.entity.Book;
 import com.digital_libary.Digital_Library.book.mapper.BookMapper;
 import com.digital_libary.Digital_Library.book.repository.BookRepository;
 import com.digital_libary.Digital_Library.book.service.BookUserService;
+import com.digital_libary.Digital_Library.report.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class BookUserServiceImpl implements BookUserService {
 
     @Override
     public List<BookResponse> getByCategory(String category) {
-        List<Book> bookList = repository.findByCategoryContainingIgnoreCase("%" + category + "%");
+        List<Book> bookList = repository.findByCategoryContainingIgnoreCase( category);
         return bookList.stream().map(mapper::toDto).toList();
     }
 
@@ -48,8 +49,8 @@ public class BookUserServiceImpl implements BookUserService {
     }
 
     @Override
-    public List<BookResponse> getByPriceBound(Double price1, Double price2) {
-        List<Book> bookList=repository.findByPriceBetween(price1,price2);
+    public List<BookResponse> getByPriceBound(Double minPrice, Double maxPrice) {
+        List<Book> bookList=repository.findByPriceBetween(minPrice, maxPrice);
         return bookList.stream().map(mapper::toDto).toList();
     }
 }

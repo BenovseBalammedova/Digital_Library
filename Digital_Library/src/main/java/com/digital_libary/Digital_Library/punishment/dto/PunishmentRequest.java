@@ -1,8 +1,11 @@
 package com.digital_libary.Digital_Library.punishment.dto;
 
 
+import jakarta.persistence.Column;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -11,10 +14,20 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PunishmentRequest {
 
-    Long userId;
+    String userId;
 
-    Long bookId;
+    String bookId;
 
     Double price;
+
+    LocalDate startDate;
+
+    LocalDate endDate;
+
+    String reason;
+
+    String status;
+
+    Double fineAmount;
 
 }

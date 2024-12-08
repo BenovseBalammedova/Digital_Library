@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-12-01T11:23:50-0800",
+    date = "2024-12-07T15:31:56-0800",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 @Component
@@ -29,7 +29,7 @@ public class SaleMapperImpl implements SaleMapper {
         saleResponse1.totalAmount( saleResponse.getTotalAmount() );
         saleResponse1.saleDate( saleResponse.getSaleDate() );
         saleResponse1.count( saleResponse.getCount() );
-        saleResponse1.price( saleResponse.getPrice() );
+        saleResponse1.salePrice( saleResponse.getSalePrice() );
         saleResponse1.discount( saleResponse.getDiscount() );
         saleResponse1.type( saleResponse.getType() );
 
@@ -50,7 +50,7 @@ public class SaleMapperImpl implements SaleMapper {
         sale.fkPaymentId( saleRequest.getFkPaymentId() );
         sale.saleDate( saleRequest.getSaleDate() );
         sale.count( saleRequest.getCount() );
-        sale.price( saleRequest.getPrice() );
+        sale.salePrice( saleRequest.getSalePrice() );
         sale.totalAmount( saleRequest.getTotalAmount() );
         sale.discount( saleRequest.getDiscount() );
         sale.type( saleRequest.getType() );
@@ -70,7 +70,7 @@ public class SaleMapperImpl implements SaleMapper {
         existingSale.setFkPaymentId( updateSale.getFkPaymentId() );
         existingSale.setSaleDate( updateSale.getSaleDate() );
         existingSale.setCount( updateSale.getCount() );
-        existingSale.setPrice( updateSale.getPrice() );
+        existingSale.setSalePrice( updateSale.getSalePrice() );
         existingSale.setTotalAmount( updateSale.getTotalAmount() );
         existingSale.setDiscount( updateSale.getDiscount() );
         existingSale.setType( updateSale.getType() );

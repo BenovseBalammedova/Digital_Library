@@ -16,7 +16,7 @@ public class BookAdminController {
     private final BookAdminService bookAdminService;
 
 
-    @GetMapping("/get-all")
+    @GetMapping("get-all")
     public List<Book> getAll() {
         return bookAdminService.getAll();
     }
@@ -53,20 +53,19 @@ public class BookAdminController {
         return bookAdminService.getById(id);
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     public void create(@RequestBody BookRequest book) {
         bookAdminService.create(book);
 
 
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("{id}")
     public void update(@PathVariable Long id, @RequestBody BookRequest book) {
         bookAdminService.update(id, book);
-
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         bookAdminService.delete(id);
 

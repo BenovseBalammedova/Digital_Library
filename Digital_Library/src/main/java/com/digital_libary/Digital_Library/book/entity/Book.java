@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "Book")
+@Table(name = "book")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Book {
     @Id

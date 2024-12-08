@@ -25,7 +25,7 @@ public class SaleRequest {
 
     Long count;
 
-    Double price;
+    Double salePrice;
 
     Double discount;
 

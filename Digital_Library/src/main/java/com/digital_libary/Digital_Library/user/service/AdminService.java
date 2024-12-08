@@ -17,7 +17,13 @@ public interface AdminService {
 
     List<User> getByPhoneNumber(String phoneNumber);
 
+    List<User> getByAgeBetween(Integer minAge, Integer maxAge);
+
     void create(UserRequest user);
+
+    void isUsernameTaken(String username);
+
+    void validatePassword(String password);
 
     void delete(Long id);
 

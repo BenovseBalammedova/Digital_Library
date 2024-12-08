@@ -26,7 +26,7 @@ public class SaleResponse {
 
     Long count;
 
-    Double price;
+    Double salePrice;
 
     Double discount;
 

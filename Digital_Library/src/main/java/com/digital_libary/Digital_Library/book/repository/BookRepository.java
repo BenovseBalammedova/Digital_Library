@@ -17,6 +17,6 @@ public interface BookRepository extends JpaRepository<Book,Long> {
 
     List<Book> findByNameContainingIgnoreCase(String name);
 
-    List<Book> findByPriceBetween(Double price1,Double price2);
+    List<Book> findByPriceBetween(Double minPrice,Double maxPrice);
 
 }

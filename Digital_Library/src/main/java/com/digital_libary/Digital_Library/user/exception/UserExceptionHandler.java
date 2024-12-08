@@ -1,5 +1,6 @@
 package com.digital_libary.Digital_Library.user.exception;
 
+import com.digital_libary.Digital_Library.user.exception.superexception.MainBadRequestException;
 import com.digital_libary.Digital_Library.user.exception.superexception.MainInvalidException;
 import com.digital_libary.Digital_Library.user.exception.superexception.MainNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,22 @@ public class UserExceptionHandler extends ResponseEntityExceptionHandler {
     public final ResponseEntity<Object> handleUserInvalidException(Exception ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(
                 LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorDetails,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MainBadRequestException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public final ResponseEntity<Object> handleMainUserNameBadRequestException(Exception ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(
+                LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorDetails,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public final ResponseEntity<Object> handleMainUserPasswordBadRequestException(Exception ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(
+                LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorDetails,HttpStatus.BAD_REQUEST);
     }
 }

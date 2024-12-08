@@ -7,6 +7,7 @@ import com.digital_libary.Digital_Library.book.exception.subeexception.BookNotFo
 import com.digital_libary.Digital_Library.book.mapper.BookMapper;
 import com.digital_libary.Digital_Library.book.repository.BookRepository;
 import com.digital_libary.Digital_Library.book.service.BookAdminService;
+import com.digital_libary.Digital_Library.report.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,8 @@ public class BookAdminServiceImpl implements BookAdminService {
     private final BookRepository repository;
 
     private final BookMapper bookMapper;
+
+    private final ReportService reportService;
 
     @Override
     public List<Book> getAll() {
@@ -48,8 +51,8 @@ public class BookAdminServiceImpl implements BookAdminService {
     }
 
     @Override
-    public List<Book> getByPriceBound(Double price1, Double price2) {
-        return repository.findByPriceBetween(price1, price2);
+    public List<Book> getByPriceBound(Double minPrice, Double maxPrice) {
+        return repository.findByPriceBetween(minPrice, maxPrice);
 
     }
 
@@ -65,7 +68,7 @@ public class BookAdminServiceImpl implements BookAdminService {
     public void create(BookRequest book) {
         Book books = bookMapper.toEntity(book);
         repository.save(books);
-
+        reportService.incrementBookCount();
     }
 
     @Override

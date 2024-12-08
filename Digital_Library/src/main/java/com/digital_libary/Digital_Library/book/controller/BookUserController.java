@@ -17,7 +17,7 @@ public class BookUserController {
 
     private final BookUserService bookUserService;
 
-    @GetMapping("/get-all")
+    @GetMapping("get-all")
     public List<BookResponse> getAll() {
         return bookUserService.getAll();
     }

@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
 public class BookRequest {
 
     String name;

@@ -3,6 +3,7 @@ package com.digital_libary.Digital_Library.user.service.impl;
 import com.digital_libary.Digital_Library.user.dto.UserRequest;
 import com.digital_libary.Digital_Library.user.exception.subexception.UserInvalidException;
 import com.digital_libary.Digital_Library.user.exception.subexception.UserNotFoundException;
+import com.digital_libary.Digital_Library.user.exception.subexception.UsernameAlreadyTakenException;
 import com.digital_libary.Digital_Library.user.mapper.UserMapper;
 import com.digital_libary.Digital_Library.user.repository.UserRepository;
 import com.digital_libary.Digital_Library.user.service.AdminService;
@@ -37,8 +38,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<User> getByAddress(String address) {
-        List<User> userlist = adminRepository.findAll();
-        return userlist.stream().filter(admin -> admin.getAddress().contains(address)).toList();
+        return adminRepository.findByAddressContainingIgnoreCase(address);
+
     }
 
     @Override
@@ -49,14 +50,39 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<User> getByPhoneNumber(String phoneNumber) {
-        List<User> users = adminRepository.findAll();
-        return users.stream().filter(admin -> admin.getPhoneNumber().contains(phoneNumber)).toList();
+        return adminRepository.findByPhoneNumberContainingIgnoreCase(phoneNumber);
     }
 
     @Override
+    public List<User> getByAgeBetween(Integer minAge, Integer maxAge) {
+        return adminRepository.findByAgeBetween(minAge, maxAge);
+    }
+
+
+    @Override
     public void create(UserRequest user) {
+        isUsernameTaken(user.getUsername());
+        validatePassword(user.getPassword());
         User users = adminMapper.toEntity(user);
         adminRepository.save(users);
+    }
+
+    @Override
+    public void isUsernameTaken(String username) {
+        if (adminRepository.existsByUsername(username)) {
+            throw new UsernameAlreadyTakenException
+                    ("This username already exists, please choose another username.");
+        }
+
+    }
+
+    @Override
+    public void validatePassword(String password) {
+        if (password.length() != 6) {
+            throw new IllegalArgumentException("Password must be at least 6 characters long.");
+
+        }
+
     }
 
     @Override
