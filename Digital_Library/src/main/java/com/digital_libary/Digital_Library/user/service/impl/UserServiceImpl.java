@@ -1,6 +1,8 @@
 package com.digital_libary.Digital_Library.user.service.impl;
 
+import com.digital_libary.Digital_Library.config.PasswordConfig;
 import com.digital_libary.Digital_Library.report.service.ReportService;
+import com.digital_libary.Digital_Library.user.dto.RegisterRequest;
 import com.digital_libary.Digital_Library.user.dto.UserRequest;
 import com.digital_libary.Digital_Library.user.entity.User;
 import com.digital_libary.Digital_Library.user.exception.subexception.UsernameAlreadyTakenException;
@@ -10,6 +12,7 @@ import com.digital_libary.Digital_Library.user.mapper.UserMapper;
 import com.digital_libary.Digital_Library.user.repository.UserRepository;
 import com.digital_libary.Digital_Library.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -20,6 +23,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapper mapper;
     private final UserRepository userRepository;
     private final ReportService reportService;
+    private final PasswordEncoder encoder;
 
 
     @Override
@@ -61,5 +65,18 @@ public class UserServiceImpl implements UserService {
         if (password.length() != 6) {
             throw new IllegalArgumentException("Password must be at least 6 characters long.");
         }
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findUserByEmail(email).orElseThrow(() ->
+                new UserNotFoundException("User is not found"));
+    }
+
+    @Override
+    public void register(RegisterRequest request) {
+       User user= mapper.toUserFromRegisterRequest(request);
+       user.setPassword(encoder.encode(request.password()));
+        userRepository.save(user);
     }
 }

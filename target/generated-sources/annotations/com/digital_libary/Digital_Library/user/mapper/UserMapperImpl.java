@@ -1,5 +1,7 @@
 package com.digital_libary.Digital_Library.user.mapper;
 
+import com.digital_libary.Digital_Library.security.MyUserSecurity;
+import com.digital_libary.Digital_Library.user.dto.RegisterRequest;
 import com.digital_libary.Digital_Library.user.dto.UserRequest;
 import com.digital_libary.Digital_Library.user.dto.UserResponse;
 import com.digital_libary.Digital_Library.user.entity.User;
@@ -8,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-12-07T15:31:56-0800",
+    date = "2024-12-18T04:16:57-0800",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 @Component
@@ -48,6 +50,37 @@ public class UserMapperImpl implements UserMapper {
         user.phoneNumber( userRequest.getPhoneNumber() );
         user.address( userRequest.getAddress() );
         user.role( userRequest.getRole() );
+
+        return user.build();
+    }
+
+    @Override
+    public MyUserSecurity toMyUserSecurity(User user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        String email = null;
+        String password = null;
+
+        email = user.getEmail();
+        password = user.getPassword();
+
+        MyUserSecurity myUserSecurity = new MyUserSecurity( email, password );
+
+        return myUserSecurity;
+    }
+
+    @Override
+    public User toUserFromRegisterRequest(RegisterRequest request) {
+        if ( request == null ) {
+            return null;
+        }
+
+        User.UserBuilder user = User.builder();
+
+        user.email( request.email() );
+        user.password( request.password() );
 
         return user.build();
     }

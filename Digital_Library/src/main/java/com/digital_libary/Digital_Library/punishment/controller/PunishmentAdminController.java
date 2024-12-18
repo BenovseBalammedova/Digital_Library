@@ -9,40 +9,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/punishment")
+@RequestMapping("/api/punishment/")
 @RequiredArgsConstructor
 public class PunishmentAdminController {
-    private final PunishmentAdminService punishmentAdminService;
+    private final PunishmentAdminService service;
 
     @PostMapping()
     public void addPunishment(@RequestBody PunishmentRequest punishment) {
-        punishmentAdminService.addPunishment(punishment);
+        service.addPunishment(punishment);
     }
 
-    @GetMapping("/get_all")
+    @GetMapping()
     public List<Punishment> getAllPunishments() {
-        return punishmentAdminService.getAllPunishments();
+        return service.getAllPunishments();
     }
 
-    @GetMapping("/{userId}/{bookId}")
-    public List<Punishment> getPunishmentsByUserAndBook(String userId, String bookId) {
-        return punishmentAdminService.getPunishmentsByUserAndBook(userId, bookId);
+    @GetMapping("{user-id}/{book-id}")
+    public List<Punishment> getPunishmentsByUserAndBook(@PathVariable String userId,@PathVariable String bookId)
+    {
+        return service.getPunishmentsByUserAndBook(userId, bookId);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public void update(@PathVariable Long id, @RequestBody PunishmentRequest punishment) {
-        punishmentAdminService.update(id, punishment);
+        service.update(id, punishment);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
-        punishmentAdminService.delete(id);
-    }
-
-    @GetMapping("/applyOverduePunishments")
-    public void applyPunishmentIfOverdue() {
-        punishmentAdminService.applyPunishmentIfOverdue();
-
+        service.delete(id);
     }
 
 }

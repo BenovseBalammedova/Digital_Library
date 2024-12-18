@@ -1,6 +1,8 @@
 package com.digital_libary.Digital_Library.user.service;
 
+import com.digital_libary.Digital_Library.user.dto.RegisterRequest;
 import com.digital_libary.Digital_Library.user.dto.UserRequest;
+import com.digital_libary.Digital_Library.user.entity.User;
 
 public interface UserService {
 
@@ -14,5 +16,7 @@ public interface UserService {
 
     void validatePassword(String password);
 
+    User getUserByEmail(String email);
 
+    void register(RegisterRequest request);
 }

@@ -5,8 +5,8 @@ import com.digital_libary.Digital_Library.punishment.exception.subexception.Puni
 import com.digital_libary.Digital_Library.punishment.exception.subexception.PunishmentNotFoundException;
 import com.digital_libary.Digital_Library.punishment.repository.PunishmentRepository;
 import com.digital_libary.Digital_Library.punishment.service.PunishmentUserService;
-import com.digital_libary.Digital_Library.rent.entity.Rent;
-import com.digital_libary.Digital_Library.rent.exception.subexception.RentNotFoundException;
+
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +20,12 @@ public class PunishmentUserServiceImpl implements PunishmentUserService {
 
     @Override
     public Punishment getPunishmentById(Long id) {
-        return repository.findById(id).orElseThrow(()->new PunishmentNotFoundException("Admin is not found"));
+        return repository.findById(id).orElseThrow(() ->
+                new PunishmentNotFoundException("Admin is not found"));
     }
 
     @Override
-    public Punishment getPunishmentDetails(Long id,String userId) {
+    public Punishment getPunishmentDetails(Long id, String userId) {
         if (id <= 0) {
             throw new PunishmentInvalidException("Id is not correct");
         }
@@ -32,8 +33,9 @@ public class PunishmentUserServiceImpl implements PunishmentUserService {
     }
 
     @Override
-    public void returnBook(Long id) {
-        Punishment punishment = repository.findById(id).orElseThrow(() -> new PunishmentNotFoundException("Punishment is not found"));
+    public void processReturnAndFine(Long id) {
+        Punishment punishment = repository.findById(id).orElseThrow(() ->
+                new PunishmentNotFoundException("Punishment is not found"));
         LocalDate today = LocalDate.now();
         if (today.isAfter(punishment.getStartDate())) {
             long daysOverdue = ChronoUnit.DAYS.between(punishment.getStartDate(), today);

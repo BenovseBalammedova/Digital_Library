@@ -1,6 +1,7 @@
 package com.digital_libary.Digital_Library.book.service.impl;
 
 import com.digital_libary.Digital_Library.book.dto.BookRequest;
+import com.digital_libary.Digital_Library.book.dto.BookResponse;
 import com.digital_libary.Digital_Library.book.entity.Book;
 import com.digital_libary.Digital_Library.book.exception.subeexception.BookInvalidException;
 import com.digital_libary.Digital_Library.book.exception.subeexception.BookNotFountException;
@@ -20,7 +21,7 @@ public class BookAdminServiceImpl implements BookAdminService {
 
     private final BookRepository repository;
 
-    private final BookMapper bookMapper;
+    private final BookMapper mapper;
 
     private final ReportService reportService;
 
@@ -31,28 +32,33 @@ public class BookAdminServiceImpl implements BookAdminService {
     }
 
     @Override
-    public List<Book> getByCategory(String category) {
-        return repository.findByCategoryContainingIgnoreCase(category);
+    public List<BookResponse> getByCategory(String category) {
+        List<Book> bookList=repository.findByCategoryContainingIgnoreCase(category);
+        return bookList.stream().map(mapper::toDto).toList();
     }
 
     @Override
-    public List<Book> getByLanguage(String language) {
-        return repository.findByLanguageContainingIgnoreCase(language);
+    public List<BookResponse> getByLanguage(String language) {
+        List<Book> bookList=repository.findByLanguageContainingIgnoreCase(language);
+        return bookList.stream().map(mapper::toDto).toList();
     }
 
     @Override
-    public List<Book> getByAuthor(String author) {
-        return repository.findByAuthorContainingIgnoreCase(author);
+    public List<BookResponse> getByAuthor(String author) {
+        List<Book> bookList=repository.findByAuthorContainingIgnoreCase(author);
+        return bookList.stream().map(mapper::toDto).toList();
     }
 
     @Override
-    public List<Book> getByName(String name) {
-        return repository.findByNameContainingIgnoreCase(name);
+    public List<BookResponse> getByName(String name) {
+        List<Book> bookList=repository.findByNameContainingIgnoreCase(name);
+        return bookList.stream().map(mapper::toDto).toList();
     }
 
     @Override
-    public List<Book> getByPriceBound(Double minPrice, Double maxPrice) {
-        return repository.findByPriceBetween(minPrice, maxPrice);
+    public List<BookResponse> getByPriceBound(Double minPrice, Double maxPrice) {
+        List<Book> bookList=repository.findByPriceBetween(minPrice, maxPrice);
+        return bookList.stream().map(mapper::toDto).toList();
 
     }
 
@@ -66,7 +72,7 @@ public class BookAdminServiceImpl implements BookAdminService {
 
     @Override
     public void create(BookRequest book) {
-        Book books = bookMapper.toEntity(book);
+        Book books = mapper.toEntity(book);
         repository.save(books);
         reportService.incrementBookCount();
     }
@@ -77,7 +83,7 @@ public class BookAdminServiceImpl implements BookAdminService {
             throw new BookInvalidException("Id is not correct");
         }
         Book books = repository.findById(id).orElseThrow(() -> new BookNotFountException("Book is not found"));
-        bookMapper.updateBookFromDto(book, books);
+        mapper.updateBookFromDto(book, books);
         repository.save(books);
     }
 

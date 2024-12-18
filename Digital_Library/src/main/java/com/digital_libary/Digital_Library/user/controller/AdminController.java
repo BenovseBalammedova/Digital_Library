@@ -9,38 +9,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/v2")
+@RequestMapping("/api/admin/v2/")
 @RequiredArgsConstructor
 public class AdminController {
 
     private final AdminService adminService;
 
-    @GetMapping("get-all")
+    @GetMapping()
     public List<User> getAll() {
         return adminService.getAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public User getById(@PathVariable Long id) {
         return adminService.getById(id);
     }
 
-    @GetMapping("/address/{address}")
+    @GetMapping("{address}")
     public List<User> getByAddress(@PathVariable String address) {
         return adminService.getByAddress(address);
     }
 
-    @GetMapping("/age/{age}")
+    @GetMapping("{age}")
     public List<User> getByAge(@PathVariable Integer age) {
         return adminService.getByAge(age);
     }
 
-    @GetMapping("/phoneNumber/{phone-number}")
+    @GetMapping("{phone-number}")
     public List<User> getByPhoneNumber(@PathVariable String phoneNumber) {
         return adminService.getByPhoneNumber(phoneNumber);
     }
 
-    @GetMapping("/age-between/{minAge}/{maxAge}")
+    @GetMapping("age-between/{minAge}/{maxAge}")
    public List<User> getByAgeBetween(@PathVariable Integer minAge,@PathVariable Integer maxAge){
         return adminService.getByAgeBetween(minAge, maxAge);
    }

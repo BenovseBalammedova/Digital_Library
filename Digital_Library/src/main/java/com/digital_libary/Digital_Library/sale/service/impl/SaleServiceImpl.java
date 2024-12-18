@@ -26,7 +26,7 @@ public class SaleServiceImpl implements SaleService {
     public void create(SaleRequest sale) {
         try {
             Sale sales = mapper.toEntity(sale);
-              repository.save(sales);
+            repository.save(sales);
 
             reportService.addTotalDiscount(sale.getDiscount());
 
@@ -44,7 +44,8 @@ public class SaleServiceImpl implements SaleService {
         if (id <= 0) {
             throw new SaleInvalidException("Id is not correct");
         }
-        Sale sales = repository.findById(id).orElseThrow(() -> new SaleNotFoundException("Sale is not found"));
+        Sale sales = repository.findById(id).orElseThrow(() ->
+                new SaleNotFoundException("Sale is not found"));
         mapper.updateSaleFromDto(sale, sales);
         repository.save(sales);
     }
@@ -67,6 +68,7 @@ public class SaleServiceImpl implements SaleService {
 
     @Override
     public Double getTotalSalesByUserId(String userId) {
+
         return repository.findByTotalSalesByUserId(userId);
     }
 
@@ -82,6 +84,7 @@ public class SaleServiceImpl implements SaleService {
 
     @Override
     public List<Sale> getSalesWithDiscountApplied() {
+
         return repository.findBySalesWithDiscountApplied();
     }
 

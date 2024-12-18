@@ -17,6 +17,5 @@ public interface PunishmentAdminService {
 
     void delete(Long id);
 
-    void applyPunishmentIfOverdue();
 
 }

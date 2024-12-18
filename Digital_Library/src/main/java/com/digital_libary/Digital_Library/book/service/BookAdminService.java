@@ -1,6 +1,7 @@
 package com.digital_libary.Digital_Library.book.service;
 
 import com.digital_libary.Digital_Library.book.dto.BookRequest;
+import com.digital_libary.Digital_Library.book.dto.BookResponse;
 import com.digital_libary.Digital_Library.book.entity.Book;
 
 import java.util.List;
@@ -9,15 +10,15 @@ public interface BookAdminService {
 
     List<Book> getAll();
 
-    List<Book> getByCategory(String category);
+    List<BookResponse> getByCategory(String category);
 
-    List<Book> getByLanguage(String language);
+    List<BookResponse> getByLanguage(String language);
 
-    List<Book> getByAuthor(String author);
+    List<BookResponse> getByAuthor(String author);
 
-    List<Book> getByName(String name);
+    List<BookResponse> getByName(String name);
 
-    List<Book> getByPriceBound(Double minPrice, Double maxPrice);
+    List<BookResponse> getByPriceBound(Double minPrice, Double maxPrice);
 
     Book getById(Long id);
 

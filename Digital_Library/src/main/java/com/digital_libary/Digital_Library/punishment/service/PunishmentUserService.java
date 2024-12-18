@@ -10,6 +10,6 @@ public interface PunishmentUserService {
 
     Punishment getPunishmentDetails(Long id, String userId);
 
-    void returnBook(Long id);
+    void processReturnAndFine(Long id);
 
 }

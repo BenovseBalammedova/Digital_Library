@@ -1,5 +1,6 @@
 package com.digital_libary.Digital_Library.book.repository;
 
+import com.digital_libary.Digital_Library.book.dto.BookResponse;
 import com.digital_libary.Digital_Library.book.entity.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

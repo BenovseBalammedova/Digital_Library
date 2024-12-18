@@ -19,13 +19,13 @@ public class PunishmentUserController {
         return service.getPunishmentById(id);
     }
 
-    @GetMapping("/{id}/{userId}")
+    @GetMapping("/{id}/{user-id}")
     public Punishment getPunishmentDetails(@PathVariable Long id, @PathVariable String userId) {
         return service.getPunishmentDetails(id, userId);
     }
 
-    @GetMapping("/returnBook/{id}")
-    public void returnBook(@PathVariable Long id) {
-        service.returnBook(id);
+    @GetMapping("/return/{id}")
+    public void processReturnAndFine(@PathVariable Long id) {
+        service.processReturnAndFine(id);
     }
 }

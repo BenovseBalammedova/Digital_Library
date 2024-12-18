@@ -11,44 +11,43 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/user/")
 @RequiredArgsConstructor
 public class BookUserController {
 
     private final BookUserService bookUserService;
 
-    @GetMapping("get-all")
+    @GetMapping()
     public List<BookResponse> getAll() {
         return bookUserService.getAll();
     }
 
-    @GetMapping("/category/{category}")
+    @GetMapping("{category}")
     public List<BookResponse> getByCategory(@PathVariable String category) {
         return bookUserService.getByCategory(category);
 
     }
 
-    @GetMapping("/language/{language}")
+    @GetMapping("{language}")
     public List<BookResponse> getByLanguage(@PathVariable String language) {
         return bookUserService.getByLanguage(language);
 
-
     }
 
-    @GetMapping("/author/{author}")
+    @GetMapping("{author}")
     public List<BookResponse> getByAuthor(@PathVariable String author) {
         return bookUserService.getByAuthor(author);
 
     }
 
-    @GetMapping("/name/{name}")
+    @GetMapping("{name}")
     public List<BookResponse> getByName(@PathVariable String name) {
         return bookUserService.getByName(name);
     }
 
-    @GetMapping("/price/{price1}/{price2}")
-    public List<BookResponse> getByPriceBound(@PathVariable Double price1, @PathVariable Double price2) {
-        return bookUserService.getByPriceBound(price1, price2);
+    @GetMapping("{min-price}/{max-price}")
+    public List<BookResponse> getByPriceBound(@PathVariable Double minPrice, @PathVariable Double maxPrice) {
+        return bookUserService.getByPriceBound(minPrice, maxPrice);
     }
 
 
