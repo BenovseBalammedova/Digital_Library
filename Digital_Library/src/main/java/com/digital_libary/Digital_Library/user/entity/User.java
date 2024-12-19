@@ -29,8 +29,8 @@ public class User {
     @Column(name = "password", nullable = false)
     String password;
 
-//    @Column(name = "is_active")
-//    private Boolean isActive;
+    @Column(name = "is_active")
+    Boolean isActive;
 
     @Column(name = "phone_number", nullable = false)
     String phoneNumber;

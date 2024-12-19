@@ -1,6 +1,6 @@
 package com.digital_libary.Digital_Library.user.mapper;
 
-import com.digital_libary.Digital_Library.security.MyUserSecurity;
+import com.digital_libary.Digital_Library.security.MyUserDetails;
 import com.digital_libary.Digital_Library.user.dto.RegisterRequest;
 import com.digital_libary.Digital_Library.user.dto.UserRequest;
 import com.digital_libary.Digital_Library.user.dto.UserResponse;
@@ -16,9 +16,9 @@ public interface UserMapper {
 
     User toEntity(UserRequest userRequest);
 
-    MyUserSecurity toMyUserSecurity(User user);
+    MyUserDetails toMyUserDetails(User user);
 
-    User toUserFromRegisterRequest(RegisterRequest request);
+    User toUser(RegisterRequest request);
 
     void updateUserFromDto(UserRequest updateUser, @MappingTarget User user);
 }

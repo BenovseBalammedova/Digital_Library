@@ -1,6 +1,5 @@
 package com.digital_libary.Digital_Library.user.service.impl;
 
-import com.digital_libary.Digital_Library.config.PasswordConfig;
 import com.digital_libary.Digital_Library.report.service.ReportService;
 import com.digital_libary.Digital_Library.user.dto.RegisterRequest;
 import com.digital_libary.Digital_Library.user.dto.UserRequest;
@@ -75,8 +74,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void register(RegisterRequest request) {
-       User user= mapper.toUserFromRegisterRequest(request);
-       user.setPassword(encoder.encode(request.password()));
+       User user= mapper.toUser(request);
+       user.setPassword(encoder.encode(request.getPassword()));
         userRepository.save(user);
     }
 }

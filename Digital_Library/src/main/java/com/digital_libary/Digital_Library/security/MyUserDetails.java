@@ -4,15 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 import java.util.List;
+
 @RequiredArgsConstructor
-public class MyUserSecurity implements UserDetails {
-    private  final String email;
+public class MyUserDetails implements UserDetails {
+    private final String email;
     private final String password;
-//    private final Boolean isActive;
+    private final Boolean isActive;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -46,6 +46,6 @@ public class MyUserSecurity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.isActive;
     }
 }

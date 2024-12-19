@@ -1,6 +1,6 @@
 package com.digital_libary.Digital_Library.user.mapper;
 
-import com.digital_libary.Digital_Library.security.MyUserSecurity;
+import com.digital_libary.Digital_Library.security.MyUserDetails;
 import com.digital_libary.Digital_Library.user.dto.RegisterRequest;
 import com.digital_libary.Digital_Library.user.dto.UserRequest;
 import com.digital_libary.Digital_Library.user.dto.UserResponse;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-12-18T04:16:57-0800",
+    date = "2024-12-19T03:51:01-0800",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 @Component
@@ -55,32 +55,40 @@ public class UserMapperImpl implements UserMapper {
     }
 
     @Override
-    public MyUserSecurity toMyUserSecurity(User user) {
+    public MyUserDetails toMyUserDetails(User user) {
         if ( user == null ) {
             return null;
         }
 
         String email = null;
         String password = null;
+        Boolean isActive = null;
 
         email = user.getEmail();
         password = user.getPassword();
+        isActive = user.getIsActive();
 
-        MyUserSecurity myUserSecurity = new MyUserSecurity( email, password );
+        MyUserDetails myUserDetails = new MyUserDetails( email, password, isActive );
 
-        return myUserSecurity;
+        return myUserDetails;
     }
 
     @Override
-    public User toUserFromRegisterRequest(RegisterRequest request) {
+    public User toUser(RegisterRequest request) {
         if ( request == null ) {
             return null;
         }
 
         User.UserBuilder user = User.builder();
 
-        user.email( request.email() );
-        user.password( request.password() );
+        user.username( request.getUsername() );
+        user.age( request.getAge() );
+        user.email( request.getEmail() );
+        user.password( request.getPassword() );
+        user.isActive( request.getIsActive() );
+        user.phoneNumber( request.getPhoneNumber() );
+        user.address( request.getAddress() );
+        user.role( request.getRole() );
 
         return user.build();
     }
